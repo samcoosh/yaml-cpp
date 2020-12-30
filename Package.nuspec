@@ -16,7 +16,8 @@
     </dependencies>
   </metadata>
   <files>
+	<file src="package.targets"          target="build\native\yaml-cpp.targets" />  
 	<file src="package\lib\yaml-cpp.lib" target="build\native\lib\yaml-cpp.lib" />
-	<file src="package\include\**\*.h" target="build\native\include" />
+	<file src="package\include\**\*.h" 	 target="build\native\include" />
   </files>
 </package>
