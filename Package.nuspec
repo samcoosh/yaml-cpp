@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>yaml-cpp</id>
+    <version>1.0.0</version>
+    <authors>samcoosh</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/samcoosh/yaml-cpp</projectUrl>
+    <description>yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>native,yaml-cpp,C++,C,yaml</tags>
+	<repository type="git" url="https://github.com/samcoosh/yaml-cpp" />
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="package\lib\yaml-cpp.lib" target="build\native\lib\yaml-cpp.lib" />
+	<file src="package\include\**\*.h" target="build\native\include" />
+  </files>
+</package>
