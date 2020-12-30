@@ -1,28 +1,26 @@
-version: 1.0.{build}
-
-environment:
-  matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      CMAKE_GENERATOR: Visual Studio 14 2015
-      CMAKE_PLATFORM: win32
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      CMAKE_GENERATOR: Visual Studio 14 2015
-      CMAKE_PLATFORM: x64
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      CMAKE_GENERATOR: Visual Studio 15 2017
-      CMAKE_PLATFORM: win32
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      CMAKE_GENERATOR: Visual Studio 15 2017
-      CMAKE_PLATFORM: x64
-
+image:
+  - Visual Studio 2019
+  
+platform:
+  - x64
+  
+configuration:
+  - Release
+  
 before_build:
-   - cmd: mkdir build
-   - cmd: cd build
-   - cmd: cmake .. -G "%CMAKE_GENERATOR%" -DCMAKE_GENERATOR_PLATFORM=%CMAKE_PLATFORM%
-   - cmd: cd ..
-
-build_script:
-   - cmake --build build
-test_script:
-   - cmd: cd build
-   - ctest
+- cmd: cmake -H. -B./build -DCMAKE_INSTALL_PREFIX=./package -DYAML_CPP_BUILD_TOOLS="OFF" -DYAML_CPP_BUILD_TESTS="OFF"
+  
+build:
+  publish_nuget: true
+  verbosity: normal
+  project: .build/INSTALL.vcxproj
+  
+after_test:
+  - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
+  
+artifacts:
+  - path: '**\*.nupkg'
+  
+deploy:
+- provider: Environment
+  name: production
