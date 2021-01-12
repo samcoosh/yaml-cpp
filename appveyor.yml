@@ -8,6 +8,8 @@ before_build:
 build_script:
 - cmd: cmake --build build_x86 --target INSTALL --config Release
 - cmd: cmake --build build_x64 --target INSTALL --config Release
+- cmd: cmake --build build_x86 --target INSTALL --config Debug
+- cmd: cmake --build build_x64 --target INSTALL --config Debug
     
 after_test:
   - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
